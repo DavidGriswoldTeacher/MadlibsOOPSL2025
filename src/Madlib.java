@@ -27,4 +27,21 @@ public class Madlib {
         storyPieces[numStoryPieces] = sp;
         numStoryPieces++;
     }
+
+    public int getNumQuestions() { 
+        return numQuestions;
+    }
+
+    public String getQuestion(int i) {
+        return questions[i];
+    }
+
+    public String getFullStory() {
+        String story = storyPieces[0];
+        for (int i = 0; i < numQuestions; i++) {
+            story = story + answers[i];
+            story = story + storyPieces[i+1];
+        }
+        return story;
+    }
 }

@@ -6,9 +6,9 @@ public class App {
      * Where the program begins!
      */
     public void start() {
-        myMadlib = readMadlib("madlibe.txt");
-        // promptForAnswers();
-        // printMadlib();
+        myMadlib = readMadlib("madlib.txt");
+        promptForAnswers();
+        io.output(myMadlib.getFullStory());
     }
 
     /**
@@ -26,19 +26,28 @@ public class App {
         
         while (io.fileHasNextLine()) {
             String nl = io.getNextLine();
-            io.output(nl);
+            m.addStoryPiece(nl);
+            if (io.fileHasNextLine()) {
+                String q = io.getNextLine();
+                m.addQuestion(q);
+            }
         }
 
         return m;
+    }
+
+    public void promptForAnswers() {
+        for (int i = 0; i < myMadlib.getNumQuestions(); i++) {
+            io.output(myMadlib.getQuestion(i));
+            String s = io.input();
+            myMadlib.addAnswer(s);
+        }
     }
 
 
 
 
 
-
-
-    
     public static void main(String[] args) throws Exception {
         new App().start();
     }
