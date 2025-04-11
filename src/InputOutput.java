@@ -7,9 +7,38 @@ public class InputOutput {
     private Scanner fileInput;
     private File file;
 
+    private File outFile;
+    private PrintStream fileOutput;
+
     public void openFile(String filename) throws FileNotFoundException {
         file = new File(filename);
         fileInput = new Scanner(file);
+    }
+
+    public void openWriteFile(String filename) {
+        try {
+            outFile = new File(filename);
+            fileOutput = new PrintStream(outFile);
+        }catch (Exception e) {
+            output("Output file was not opened - error " + e.toString());
+            outFile = null;
+            fileOutput = null;
+        }
+    }
+
+    public void closeWriteFile() {
+        fileOutput.close();
+        outFile = null;
+        fileOutput = null;
+    }
+
+    public void writeToFile(String s) {
+        if (fileOutput == null) {
+            return;
+        }else {
+            fileOutput.println(s);
+            fileOutput.flush();
+        }
     }
 
     public void closeFile() {

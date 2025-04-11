@@ -9,6 +9,9 @@ public class App {
         myMadlib = readMadlib("madlib.txt");
         promptForAnswers();
         io.output(myMadlib.getFullStory());
+        io.openWriteFile("last_full_madlib.txt");
+        io.writeToFile(myMadlib.getFullStory());
+        io.closeWriteFile();
     }
 
     /**
