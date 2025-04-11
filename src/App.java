@@ -1,14 +1,21 @@
 public class App {
+    // A controller (App) needs a connection to both our model (Madlib)
+    // and our view (io)
     private Madlib myMadlib;
     private InputOutput io = new InputOutput();
 
     /**
-     * Where the program begins!
+     * Where the program begins! This is where I outlined the structure of my program.
      */
     public void start() {
+        // read the madlib from the file into my madlib object
         myMadlib = readMadlib("madlib.txt");
         promptForAnswers();
+
+        // print the new madlib to the terminal
         io.output(myMadlib.getFullStory());
+
+        // these three lines print the madlib to a text file
         io.openWriteFile("last_full_madlib.txt");
         io.writeToFile(myMadlib.getFullStory());
         io.closeWriteFile();
@@ -38,7 +45,10 @@ public class App {
 
         return m;
     }
-
+    /**
+     * Ask the user for the answers to the madlib questions, and
+     * save them into the Madlib object
+     */
     public void promptForAnswers() {
         for (int i = 0; i < myMadlib.getNumQuestions(); i++) {
             io.output(myMadlib.getQuestion(i));
@@ -47,10 +57,9 @@ public class App {
         }
     }
 
-
-
-
-
+    /**
+     * The required main method. All it does is run the start method!
+     */
     public static void main(String[] args) throws Exception {
         new App().start();
     }
